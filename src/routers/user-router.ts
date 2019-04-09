@@ -1,7 +1,8 @@
 import express from 'express';
 import { User } from '../model/user';
 import { authMiddleware } from '../middleware/auth.middleware';
-import { users } from '../model.classes';
+import { usersArray } from '../usersArray';
+
 
 /**
  * User router will handle all requests starting with
@@ -17,7 +18,7 @@ userRouter.get('', [
   authMiddleware(['admin']),
   (req, res) => {
     console.log('retreiving all users')
-    res.json(users);
+    res.json(usersArray);
   }])
 
 /**
@@ -27,7 +28,7 @@ userRouter.get('', [
 userRouter.get('/:id', (req, res) => {
   const id: number = +req.params.id;
   console.log(`retreiving user with id: ${id}`);
-  const user = users.find(u => u.userId === id);
+  const user = usersArray.find(u => u.userId === id);
   if (user) {
     res.json(user);
   } else {
@@ -40,7 +41,7 @@ userRouter.post('', (req, res) => {
   console.log(`creating user`, req.body);
   const user: User = req.body;
   user.userId = Math.floor(Math.random() * 10000000);
-  users.push(user);
+  usersArray.push(user);
   res.status(201);
   res.send(user);
 })
@@ -48,7 +49,7 @@ userRouter.post('', (req, res) => {
 userRouter.patch('', (req, res) => {
   const { body } = req; // destructuring
   console.log(`updating user`, body);
-  const user = users.find((u) => {
+  const user = usersArray.find((u) => {
     // console.log(`u = `, u);
     return u.userId === body.userId
   });
@@ -66,15 +67,3 @@ userRouter.patch('', (req, res) => {
 })
 
 
-userRouter.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const user = users.find(u => u.username === username && u.password === password);
-
-  if (user) {
-    // attach the user data to the session object
-    req.session.user = user;
-    res.end();
-  } else {
-    res.sendStatus(401);
-  }
-})
