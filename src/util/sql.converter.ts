@@ -7,6 +7,6 @@ export function convertSqlUser(user: SqlUser) {
   return new User(user.user_id, user.user_name, user.password, user.firstname, user.lastname, user.email, user.role);
 }
 // This is a format converter for roles; sql format to CamalCase
-export function convertSqlRole(role: SqlRole) {
-  return new Role(role.role_id, role.role);
+export function convertSqlRole(roles: SqlRole) {
+  return new Role(roles.role_id, roles.role);
 }

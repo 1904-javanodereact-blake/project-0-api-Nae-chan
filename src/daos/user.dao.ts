@@ -92,13 +92,13 @@ export async function addNewUsers(newUser) {
   try {
     client = await connectionPool.connect();
     const queryString = `INSERT INTO users.users (user_id, user_name, password, firstname,
-      lastname, email, role) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
+      lastname, email) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
     const input = await client.query(queryString, [newUser.userId, newUser.username,
-      newUser.password, newUser.firstName, newUser.lastName, newUser.email, newUser.role]);
+      newUser.password, newUser.firstName, newUser.lastName, newUser.email]);
       const user = input.rows[0];
     if (user) {
       const convertedUser = convertSqlUser(user);
-      convertedUser.role = convertSqlRole(user);
+      convertedUser.role = convertSqlRole(user.role);
       return convertedUser;
     } else {
       return undefined;

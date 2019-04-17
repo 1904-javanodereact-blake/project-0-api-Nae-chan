@@ -13,6 +13,6 @@ export class SqlUser {
 
 // This is a format converter CLASS for role; sql format to CamalCase
 export class SqlRole {
-    role_id = 0;
-    role = undefined;
+    role_id: number;
+    role: string;
   }
