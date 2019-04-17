@@ -1,21 +1,22 @@
-import express = require("express");
-import { usersArray } from "../usersArray";
+import express = require('express');
+import * as usersDao from '../daos/user.dao';
 
- /**
+/**
  * This login router will handle all requests starting with
  *  /login
  */
+
 export const loginRouter = express.Router();
 
-loginRouter.post('/login', (req, res) => {
+loginRouter.post('', async (req, res) => {
     const { username, password } = req.body;
-    const user = usersArray.find(u => u.username === username && u.password === password); //TODO: Replace with DB
-  
+    const user = await usersDao.findLogInInfo(username, password);
     if (user) {
       // attach the user data to the session object
       req.session.user = user;
-      res.end();
+      // res.json(user);
+      res.send(`Welcome, ${user.firstName} ${user.lastName}!`);
     } else {
-      res.sendStatus(401);
+      res.status(400).send('Invalid Credentials. TRY AGAIN');
     }
-  })
+  });

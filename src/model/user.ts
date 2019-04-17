@@ -2,7 +2,7 @@
  * This holds the class for Users, which tracks users' info
  */
 
-import { Role } from "./role";
+import { Role } from './role';
 
 export class User {
   userId: number;

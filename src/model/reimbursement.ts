@@ -1,21 +1,22 @@
 /**
  * This hold the class for Reimbursement, which is a single reimbursements
  * an employee would submit
- * */
+ */
 
 
 export class Reimbursement {
     reimbursementId: number; // primary key
     author: number;  // foreign key -> User, not null
     amount: number;  // not null
-    dateSubmitted: number; // not null
-    dateResolved: number;
+    dateSubmitted: string; // not null
+    dateResolved: string;
     description: string; // not null
     resolver: number; // foreign key -> User
     status: number; // foreign ey -> ReimbursementStatus, not null
-    type: number // foreign key -> ReimbursementType
+    type: number; // foreign key -> ReimbursementType
 
-    constructor (reimbursementId, author, amount, dateSubmitted, dateResolved, description, resolver, status, type){
+    constructor (reimbursementId, author, amount, dateSubmitted, dateResolved,
+         description, resolver, status, type) {
         this.reimbursementId = reimbursementId;
         this.author = author;
         this.amount = amount;
@@ -28,5 +29,3 @@ export class Reimbursement {
 
     }
   }
-
-  

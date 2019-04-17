@@ -1,4 +1,5 @@
 import session from 'express-session';
+
 const sess = {
   secret: '42',
   cookie: { secure: false },
