@@ -14,7 +14,8 @@ export async function findReimbursementsByStatus(statusId: number) {
     try {
         client = await connectionPool.connect();
         const queryString = `SELECT * FROM users.reimbursements as r
-      INNER JOIN users.reimbursement_status as s ON (r.status = s.status_id) WHERE status_id = $1`;
+      INNER JOIN users.reimbursement_status as s ON (r.status = s.status_id)
+      WHERE status_id = $1 ORDER BY date_submitted`;
         const result = await client.query(queryString, [statusId]);
         const reimbursementResults = result.rows;
         if (reimbursementResults) {
@@ -37,7 +38,7 @@ export async function findReimbursementsUserId(userId: number) {
     let client: PoolClient;
     try {
         client = await connectionPool.connect();
-        const queryString = `SELECT * FROM users.reimbursements WHERE author = $1`;
+        const queryString = `SELECT * FROM users.reimbursements WHERE author = $1 ORDER BY date_submitted`;
         const result = await client.query(queryString, [userId]);
         const reimbursementResults = result.rows;
         console.log(reimbursementResults);
