@@ -13,18 +13,18 @@ export const userRouter = express.Router();
  * find all users
  * endpoint: /users
  */
-userRouter.get('', [authMiddleware(['Admin', 'Finance Manager']),
+userRouter.get('', ),
   async (req, res) => {
     console.log('retreiving all users');
     const users = await usersDao.findAllUsers();
     res.json(users);
-  }]);
+  };
 
 /**
  * find user by id
  * endpoint: /users/:id
  */
-userRouter.get('/:id', [authMiddleware(['Admin', 'Finance Manager']),
+userRouter.get('/:id', ),
  async (req, res) => {
   const id: number = +req.params.id;
   console.log(`retreiving user with id: ${id}`);
@@ -34,7 +34,7 @@ userRouter.get('/:id', [authMiddleware(['Admin', 'Finance Manager']),
   } else {
     res.sendStatus(404);
   }
-}]);
+};
 
 /**
  * Submit a new user
