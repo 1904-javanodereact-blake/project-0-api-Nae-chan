@@ -15,7 +15,7 @@ export const reimbursementsRouter = express.Router();
  * find reimbursements by statusId
  * endpoint: /reimbursements/status/:statusId
  */
-reimbursementsRouter.get('/status/:statusId', [authMiddleware(['Admin', 'Finance Manager']),
+reimbursementsRouter.get('/status/:statusId', // , [authMiddleware(['Admin', 'Finance Manager']),
     async (req, res) => {
         const statusId: number = +req.params.statusId;
       console.log('retreiving all reimbursements. Status ID is ', statusId);
@@ -26,7 +26,7 @@ reimbursementsRouter.get('/status/:statusId', [authMiddleware(['Admin', 'Finance
         res.sendStatus(404).send(`Please enter a valid status ID.
         1--Pending, 2--Approved, 5--Denied`);
       }
-    }]);
+    });
 /**
  * find reimbursements by User
  * endpoint: /reimbursements/author/userId/:userId
