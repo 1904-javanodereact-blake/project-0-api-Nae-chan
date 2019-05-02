@@ -68,11 +68,13 @@ export async function findUserById(id: number) {
     client = await connectionPool.connect();
     const queryString = 'SELECT * FROM users.users WHERE user_id = $1';
     const result = await client.query(queryString, [id]);
-    const user = result.rows[0];
-    console.log (user);
+    const user = result.rows;
+    console.log(user);
+    const convertedUser = result.rows.map(convertSqlUser);
     if (user) {
-      const convertedUser = convertSqlUser(user);
-      convertedUser.role = convertSqlRole(user);
+      for (let i = 0; i < user.length; i++) {
+        convertedUser[i].role = convertSqlRole(user[i]);
+      }
       return convertedUser;
     } else {
       return undefined;

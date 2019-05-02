@@ -15,7 +15,7 @@ loginRouter.post('', async (req, res) => {
       // attach the user data to the session object
       req.session.user = user;
       // res.json(user);
-      res.send(`Welcome, ${user.firstName} ${user.lastName}!`);
+      res.send(user);
     } else {
       res.status(400).send('Invalid Credentials. TRY AGAIN');
     }

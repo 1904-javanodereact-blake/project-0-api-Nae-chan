@@ -13,12 +13,12 @@ export const userRouter = express.Router();
  * find all users
  * endpoint: /users
  */
-userRouter.get('', [authMiddleware(['Admin', 'Finance Manager']),
+userRouter.get('', // [authMiddleware(['Admin', 'Finance Manager']),
   async (req, res) => {
     console.log('retreiving all users');
     const users = await usersDao.findAllUsers();
     res.json(users);
-  }]);
+  });
 
 /**
  * find user by id

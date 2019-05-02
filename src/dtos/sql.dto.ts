@@ -1,6 +1,6 @@
 import { Role } from '../model/role';
 
-// This is a format converter CLASS for users; sql format to CamalCase
+// This is a format converter class for USERS; sql format to CamalCase
 export class SqlUser {
     user_id: number;
     user_name: string;
@@ -11,7 +11,7 @@ export class SqlUser {
     role: Role;
 }
 
-// This is a format converter CLASS for role; sql format to CamalCase
+// This is a format converter class for ROLE; sql format to CamalCase
 export class SqlRole {
     role_id: number;
     role: string;
